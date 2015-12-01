@@ -1,0 +1,23 @@
+{
+  "name": "app-walker",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:xiaoxinghu/app-walker.git"
+  },
+  "description": "an app walker",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Xiaoxing Hu <dawnstar.hu@gmail.com>",
+  "license": "MIT",
+  "preferGlobal": true,
+  "bin": {
+    "walker": "bin/walker.js"
+  },
+  "dependencies": {
+    "commander": "^2.9.0",
+    "wd": "^0.4.0"
+  }
+}
