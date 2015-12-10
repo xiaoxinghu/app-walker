@@ -1,1 +1,1 @@
-module.exports = require('./lib/walker');
+module.exports = require('./lib/appwalker');

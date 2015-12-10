@@ -1,4 +1,4 @@
 #!/usr/bin/env node
 
-var walker = require('../lib/walker');
-walker.walk();
+var walker = require('../lib/appwalker');
+walker.page('login').sayHello();

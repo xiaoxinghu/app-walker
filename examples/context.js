@@ -10,8 +10,7 @@ context
     password: 'whatever'
   });
 
-page
-  .called('login')
+page('login')
   .should.have('inputbox').called('username').foundBy('id:username')
   .should.have('button').called('login').foundBy('...')
   .should.have('button').called('cancel').foundBy('...')
@@ -20,8 +19,7 @@ page
       .then.tap('login');
   });
 
-page
-  .called('password')
+page('password')
   .should.have('inputbox').called('password').foundBy('...')
   .should.have('button').called('submit').foundBy('...')
   .should.have('button').called('back').foundBy('...')

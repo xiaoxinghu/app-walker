@@ -1,9 +1,9 @@
 {
-  "name": "app-walker",
+  "name": "appwalker",
   "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": "git@github.com:xiaoxinghu/app-walker.git"
+    "url": "git@github.com:xiaoxinghu/appwalker.git"
   },
   "description": "an app walker",
   "main": "index.js",
