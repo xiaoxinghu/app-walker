@@ -23,7 +23,7 @@ function evalCode(path) {
   script.runInContext(context);
 }
 
-['../examples/simple.js'
-, '../examples/graph.js'].forEach(path => evalCode(path));
+['simple.js'
+, 'graph.js'].forEach(path => evalCode(path));
 
 console.log(util.inspect(walker.graph, false, null));
