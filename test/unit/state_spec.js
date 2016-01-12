@@ -5,7 +5,7 @@ var walker = require('../../lib/appwalker');
 var page = walker.page;
 var expect = require('chai').expect;
 
-describe('page', () => {
+describe('state', () => {
   it ('can generate simple page with elements', () => {
     var p = page('simple page')
       .should.have.button('login')
@@ -17,8 +17,8 @@ describe('page', () => {
         .and.it('should have text Cancel in it', btn => btn.text == 'Cancel');
 
     expect(p.name).to.equal('simple page');
-    expect(Object.keys(p.elements)).to.have.length(2);
-    expect(p.elements).to.have.property('login')
+    expect(Object.keys(p.components)).to.have.length(2);
+    expect(p.components).to.have.property('login')
       .with.property('locators').deep.equal(
         [{ by: 'id', on: 'ios', value: 'login' },
         { by: 'xpath', on: 'android', value: '//login' }]);
