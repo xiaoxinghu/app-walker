@@ -1,0 +1,1 @@
+config.entrance = 'login';

@@ -1,9 +1,10 @@
 "use strict";
 
-var walker = require('../lib/walker');
+var expect = require('chai').expect;
+var walker = require('../lib/appwalker');
 
 describe('walker', () => {
   it ('can walk', () => {
-    walker.walk();
+    expect(walker).to.have.property('walk');
   });
 });

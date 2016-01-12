@@ -1,29 +1,24 @@
 #!/usr/bin/env node
 
 var util = require('util');
-var vm = require('vm');
-var fs = require('fs');
 
 var walker = require('../lib/appwalker');
+var evalCode = require('../lib/appwalker/helper').evalCode;
 
-function evalCode(path) {
-  var sandbox = {
-    page: walker.page
-  };
+var sandbox = {
+  page: walker.page,
+  Page: walker.page,
+  config: walker.config,
+  console: console
+};
+// ['simple.js'].forEach(path => evalCode(path));
+['graph.js'].forEach(path => evalCode(path, sandbox));
 
-  var context = new vm.createContext(sandbox);
+// console.log(util.inspect(walker, false, null));
 
-  // fs.readFile(path, function(err, data) {
-  //   if (err) throw err;
-  //   var script = new vm.Script(data.toString());
-  //   var page = script.runInContext(context);
-  // })
-  var code = fs.readFileSync(path);
-  var script = new vm.Script(code.toString());
-  script.runInContext(context);
-}
+// var e = walker.graph.outEdges('login');
+// var e = walker.graph.edge('login', 'password');
+// console.log(util.inspect(e, false, null));
+// e.func();
 
-['simple.js'
-, 'graph.js'].forEach(path => evalCode(path));
-
-console.log(util.inspect(walker.graph, false, null));
+walker.walk();
