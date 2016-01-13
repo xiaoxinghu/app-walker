@@ -37,7 +37,7 @@ describe('graph', () => {
     expect(graph.outEdges('page2')).to.have.length(1);
   });
 
-  it ('can retrive page details from graph', () => {
+  it ('can retrieve page details from graph', () => {
     var p = page('simple page')
       .should.have.button('button')
         .can.be.find.by.id('buttonId')
@@ -46,7 +46,7 @@ describe('graph', () => {
     expect(graph.node('simple page')).to.deep.equal(p);
   });
 
-  it ('can genreate default traverse paths', () => {
+  it ('can generate default traverse paths', () => {
     config.entrance = 'page1';
     page('page1').can.goto('page2', function(page) {
       console.log('press button');
@@ -61,9 +61,10 @@ describe('graph', () => {
     });
     page('page4').can.goto('page2', function(page) {
       console.log('press secret button');
-    })
+    });
 
     // console.log(util.inspect(walker.graph, false, null));
+    // TODO add asserts
     walker.walk();
   });
 });
