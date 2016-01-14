@@ -49,18 +49,18 @@ describe('graph', () => {
   it ('can generate default traverse paths', () => {
     config.entrance = 'page1';
     page('page1').can.goto('page2', function(page) {
-      console.log('press button');
+      // console.log('press button');
     });
     page('page2').can.goto('page3', function(page) {
-      console.log('press another button');
+      // console.log('press another button');
     }).can.goto('page4', function(page) {
-      console.log('press special button');
+      // console.log('press special button');
     });
     page('page3').can.goto('page1', function(page) {
-      console.log('press reset button');
+      // console.log('press reset button');
     });
     page('page4').can.goto('page2', function(page) {
-      console.log('press secret button');
+      // console.log('press secret button');
     });
 
     // console.log(util.inspect(walker.graph, false, null));
