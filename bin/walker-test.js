@@ -12,7 +12,7 @@ var sandbox = {
   console: console
 };
 // ['simple.js'].forEach(path => evalCode(path));
-['graph.js'].forEach(path => evalCode(path, sandbox));
+// ['graph.js'].forEach(path => evalCode(path, sandbox));
 
 // console.log(util.inspect(walker, false, null));
 
@@ -21,4 +21,8 @@ var sandbox = {
 // console.log(util.inspect(e, false, null));
 // e.func();
 
-walker.walk();
+// walker.walk();
+
+console.log(util.inspect(walker, false, null));
+// console.log(util.inspect(walker.prototype.EVENTS, false, null));
+

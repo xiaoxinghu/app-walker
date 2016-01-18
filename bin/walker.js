@@ -7,5 +7,5 @@ var program = require('commander');
 program
   .version(pkg.version)
   .command('walk', 'walk the directory')
-  .command('test', 'test')
+  .command('info [subject]', 'show info')
   .parse(process.argv);

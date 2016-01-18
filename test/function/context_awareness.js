@@ -4,7 +4,7 @@ var util = require('util');
 var walker = require('../../lib/appwalker');
 var state = walker.state;
 var config = walker.config;
-var context = walker.context;
+var context = walker.dsl.context;
 var graph = walker.graph;
 var expect = require('chai').expect;
 
@@ -32,7 +32,7 @@ describe('context awareness', () => {
     // });
 
     // console.log(util.inspect(walker.graph, false, null));
-    walker.walk();
+    walker.walker.walk();
     console.log(util.inspect(context, false, null));
   });
 });

@@ -5,6 +5,5 @@ var walker = require('../lib/appwalker');
 
 describe('walker', () => {
   it ('can walk', () => {
-    expect(walker).to.have.property('walk');
   });
 });

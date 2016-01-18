@@ -55,7 +55,7 @@ describe('graph', () => {
     state('state1').can.goto('state2', function(from, to) {
       buffer = {from: from.name, to: to.name};
     });
-    walker.walk();
+    walker.walker.walk();
     expect(buffer.from).to.equal('state1');
     expect(buffer.to).to.equal('state2');
   });
@@ -80,6 +80,6 @@ describe('graph', () => {
 
     // console.log(util.inspect(walker.graph, false, null));
     // TODO add asserts
-    walker.walk();
+    walker.walker.walk();
   });
 });

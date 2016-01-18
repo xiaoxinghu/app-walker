@@ -2,7 +2,7 @@
 
 var util = require('util');
 var walker = require('../../lib/appwalker');
-var context = walker.context;
+var context = walker.dsl.context;
 var expect = require('chai').expect;
 
 describe('context', () => {
