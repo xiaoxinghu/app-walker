@@ -2,64 +2,79 @@
 
 var util = require('util');
 var walker = require('../../lib/appwalker');
-var page = walker.page;
+var state = walker.state;
 var config = walker.config;
 var graph = walker.graph;
 var expect = require('chai').expect;
 
 describe('graph', () => {
-  afterEach(() => {
+  beforeEach(() => {
     walker.reset();
     graph = walker.graph;
   });
+  afterEach(() => {
+    walker.reset();
+  });
 
   it ('can generate simple graph with nodes', () => {
-    page('page1');
-    page('page2');
-    page('page3');
+    state('state1');
+    state('state2');
+    state('state3');
 
     expect(graph.nodes()).to.have.length(3);
     expect(graph.nodes()).to.have.members(
-      ['page1', 'page2', 'page3']);
+      ['state1', 'state2', 'state3']);
   });
 
   it ('can generate graph with edages', () => {
-    page('page1').can.goto('page2', function(page) {});
-    page('page2').can.goto('page3', function(page) {});
-    page('page3');
+    state('state1').can.goto('state2', function(state) {});
+    state('state2').can.goto('state3', function(state) {});
+    state('state3');
 
     expect(graph.edges()).to.have.length(2);
-    expect(graph.nodeEdges('page1')).to.have.length(1);
-    expect(graph.inEdges('page1')).to.have.length(0);
-    expect(graph.outEdges('page1')).to.have.length(1);
-    expect(graph.nodeEdges('page2')).to.have.length(2);
-    expect(graph.inEdges('page2')).to.have.length(1);
-    expect(graph.outEdges('page2')).to.have.length(1);
+    expect(graph.nodeEdges('state1')).to.have.length(1);
+    expect(graph.inEdges('state1')).to.have.length(0);
+    expect(graph.outEdges('state1')).to.have.length(1);
+    expect(graph.nodeEdges('state2')).to.have.length(2);
+    expect(graph.inEdges('state2')).to.have.length(1);
+    expect(graph.outEdges('state2')).to.have.length(1);
   });
 
-  it ('can retrieve page details from graph', () => {
-    var p = page('simple page')
+  it ('can retrieve state details from graph', () => {
+    var p = state('simple state')
       .should.have.button('button')
         .can.be.find.by.id('buttonId')
         .and.it('should have text Button in it', btn => btn.text == 'Button');
 
-    expect(graph.node('simple page')).to.deep.equal(p);
+    expect(graph.node('simple state')).to.deep.equal(p);
+  });
+
+  it ('will run the function between states when walking.', () => {
+    config.entrance = 'state1';
+    let buffer = {};
+    state('state1').can.goto('state2', function(from, to) {
+      buffer = {from: from.name, to: to.name};
+    });
+    walker.walk();
+    expect(buffer.from).to.equal('state1');
+    expect(buffer.to).to.equal('state2');
   });
 
   it ('can generate default traverse paths', () => {
-    config.entrance = 'page1';
-    page('page1').can.goto('page2', function(page) {
+    config.entrance = 'state1';
+    var app = {};
+    state('state1').can.goto('state2', function(state) {
       // console.log('press button');
     });
-    page('page2').can.goto('page3', function(page) {
+    state('state2').can.goto('state3', function(state) {
       // console.log('press another button');
-    }).can.goto('page4', function(page) {
+    }).can.goto('state4', function(state) {
       // console.log('press special button');
     });
-    page('page3').can.goto('page1', function(page) {
+    state('state3').can.goto('state1', function(state) {
       // console.log('press reset button');
     });
-    page('page4').can.goto('page2', function(page) {
+    state('state4').can.goto('state2', function(state) {
       // console.log('press secret button');
     });
 
