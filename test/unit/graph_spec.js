@@ -2,8 +2,8 @@
 
 var util = require('util');
 var walker = require('../../lib/appwalker');
-var state = walker.state;
-var config = walker.config;
+var state = walker.interface.state;
+var config = walker.interface.config;
 var graph = walker.graph;
 var expect = require('chai').expect;
 
