@@ -3,10 +3,15 @@
 var util = require('util');
 var walker = require('../../lib/appwalker');
 var context = walker.interface.context;
+var scenario = walker.interface.scenario;
 var expect = require('chai').expect;
 
 describe('context', () => {
-  it ('can add/retrieve named scenario contexts', () => {
+  beforeEach(() => {
+    context.reset();
+  });
+
+  it ('can switch scenarios', () => {
     let s1 = {
       name: 'scenario1',
       user: 'user1',
@@ -19,11 +24,14 @@ describe('context', () => {
       password: 'password2'
     };
 
-    context.scenario(s1.name, s1);
-    context.scenario(s2.name, s2);
+    scenario(s1.name, s1);
+    scenario(s2.name, s2);
 
-    expect(context.scenario(s1.name)).to.deep.equal(s1);
-    expect(context.scenario(s2.name)).to.deep.equal(s2);
+    context.sandbox('scenario1');
+    expect(context.current).to.deep.equal(s1);
+
+    context.sandbox('scenario2');
+    expect(context.current).to.deep.equal(s2);
 
   });
 
@@ -33,22 +41,43 @@ describe('context', () => {
       user: 'user1',
       password: 'password1'
     };
-    context.scenario(s.name, s);
-    context.scenario(s.name, {
+    scenario(s.name, s);
+    scenario(s.name, {
       password: 'password2',
       role: 'admin'
     });
 
-    expect(context.scenario(s.name).password).to.equal('password2');
-    expect(context.scenario(s.name)).to.have.property('role').and.equal('admin');
+    context.sandbox('s1');
+    expect(context.current.password).to.equal('password2');
+    expect(context.current).to.have.property('role').and.equal('admin');
   });
 
   it ('can add/retrieve global context', () => {
     let g = {
       url: 'www.google.com',
-      platform: 'iOS'
+      platform: 'iOS',
+      app: {
+        name: 'google'
+      }
     };
     context.global = g;
-    expect(context.global).to.deep.equal(g);
+    expect(context.current).to.deep.equal(g);
+  });
+
+  it ('context cannot be modified without setter', () => {
+    // TODO implement this
+  });
+
+  it ('generates context of combination of global and current scenario', () => {
+    context.global = {
+      url: 'www.google.com'
+    };
+    scenario('s1', {
+      app: 'myApp'
+    });
+    context.sandbox('s1');
+    expect(context.current).have.property('url').and.equal('www.google.com');
+    expect(context.current).have.property('app').and.equal('myApp');
+
   });
 });

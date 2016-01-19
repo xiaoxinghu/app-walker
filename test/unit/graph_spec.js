@@ -1,19 +1,19 @@
 'use strict';
 
 var util = require('util');
-var walker = require('../../lib/appwalker');
-var state = walker.interface.state;
-var config = walker.interface.config;
-var graph = walker.graph;
+var app = require('../../lib/appwalker');
+var state = app.interface.state;
+var config = app.interface.config;
+var graph = app.graph;
 var expect = require('chai').expect;
 
 describe('graph', () => {
   beforeEach(() => {
-    walker.reset();
-    graph = walker.graph;
+    app.reset();
+    graph = app.graph;
   });
   afterEach(() => {
-    walker.reset();
+    app.reset();
   });
 
   it ('can generate simple graph with nodes', () => {
@@ -55,14 +55,13 @@ describe('graph', () => {
     state('state1').can.goto('state2', function(from, to) {
       buffer = {from: from.name, to: to.name};
     });
-    walker.walker.walk();
+    app.walker.walk();
     expect(buffer.from).to.equal('state1');
     expect(buffer.to).to.equal('state2');
   });
 
   it ('can generate default traverse paths', () => {
     config.entrance = 'state1';
-    var app = {};
     state('state1').can.goto('state2', function(state) {
       // console.log('press button');
     });
@@ -78,8 +77,8 @@ describe('graph', () => {
       // console.log('press secret button');
     });
 
-    // console.log(util.inspect(walker.graph, false, null));
+    // console.log(util.inspect(app.graph, false, null));
     // TODO add asserts
-    walker.walker.walk();
+    app.walker.walk();
   });
 });
