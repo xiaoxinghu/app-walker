@@ -29,9 +29,5 @@ var files = fs.readdirSync('.').filter((f) => {
 });
 files.forEach(path => evalCode(path, sandbox));
 console.log('eval: ', files);
-// console.log(util.inspect(walker, false, null));
 app.walker.walk();
-
-
-// console.log(util.inspect(app.graph, false, null));
 
