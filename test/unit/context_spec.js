@@ -78,6 +78,18 @@ describe('context', () => {
     context.sandbox('s1');
     expect(context.current).have.property('url').and.equal('www.google.com');
     expect(context.current).have.property('app').and.equal('myApp');
+  });
 
+  it ('can add variables to sandbox during running, and restored after re-sandbox', () => {
+    scenario('s1', {
+      app: 'myApp'
+    });
+    context.sandbox('s1');
+    context.current.version = '1.0';
+    expect(context.current).have.property('app').and.equal('myApp');
+    expect(context.current).have.property('version').and.equal('1.0');
+    context.sandbox('s1');
+    expect(context.current).have.property('app').and.equal('myApp');
+    expect(context.current).not.have.property('version');
   });
 });
