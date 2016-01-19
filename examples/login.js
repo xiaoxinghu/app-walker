@@ -7,6 +7,6 @@ page('login')
     .can.be.find.by.id('cancel')
     .and.it('should have text Cancel on it', btn => btn.text == 'Cancel')
   .can.goto('password', (page) => {
-    console.log('enter user name');
-    console.log('press login button');
+    output('enter user name');
+    output('press login button');
   });

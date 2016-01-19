@@ -16,9 +16,9 @@ if (program.dry) console.log('dry run');
 
 
 var sandbox = Object.assign({}, app.interface);
-sandbox = Object.assign(sandbox, {
-  console: console
-});
+// sandbox = Object.assign(sandbox, {
+//   console: console
+// });
 
 var files = fs.readdirSync('.').filter((f) => {
   let match = false;
