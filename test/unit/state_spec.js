@@ -2,7 +2,7 @@
 
 var util = require('util');
 var walker = require('../../lib/appwalker');
-var page = walker.interface.page;
+var page = walker.interface.state;
 var expect = require('chai').expect;
 
 describe('state', () => {
