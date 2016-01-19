@@ -17,6 +17,7 @@
     "walker": "bin/walker.js"
   },
   "dependencies": {
+    "colors": "^1.1.2",
     "commander": "^2.9.0",
     "graphlib": "^2.0.0",
     "wd": "^0.4.0"

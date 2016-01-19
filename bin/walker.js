@@ -6,6 +6,6 @@ var pkg = require('../package.json');
 var program = require('commander');
 program
   .version(pkg.version)
-  .command('walk', 'walk the directory')
+  .command('walk', 'walk the current directory')
   .command('info [subject]', 'show info')
   .parse(process.argv);
