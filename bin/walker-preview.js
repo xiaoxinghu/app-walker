@@ -28,8 +28,19 @@ files.forEach(path => evalCode(path, sandbox));
 
 if (!fs.existsSync(program.dir)) fs.mkdirSync(program.dir);
 
-fs.writeFile(path.join(program.dir, program.out), dot.write(app.graph), (err) => {
+app.graph.setNode('start', {shape: 'diamond', color: 'red'});
+app.graph.setEdge('start', app.config.entrance, {label: 'start'});
+// app.graph.edges().forEach((edge) => {
+//   let e = app.graph.edge(edge);
+//   e.label = e.desc;
+// });
+
+var dotFile = path.join(program.dir, program.out);
+fs.writeFile(dotFile, dot.write(app.graph), (err) => {
   if (err) throw err;
   console.log(`${program.out} generated.`);
+  require('child_process').exec(`dot -Tpng -O ${dotFile}`, (err, stdout, stderr) => {
+    if (err) throw err;
+  });
 });
 
