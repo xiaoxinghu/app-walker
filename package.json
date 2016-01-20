@@ -20,6 +20,7 @@
     "colors": "^1.1.2",
     "commander": "^2.9.0",
     "graphlib": "^2.0.0",
+    "graphlib-dot": "^0.6.2",
     "wd": "^0.4.0"
   },
   "devDependencies": {
