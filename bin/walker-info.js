@@ -8,4 +8,6 @@ program.parse(process.argv);
 var subject = program.args[0];
 
 var walker = require('../lib/appwalker');
-console.log(util.inspect(walker, false, null));
+var target = walker;
+if (subject) target = walker[subject];
+console.log(util.inspect(target, false, null));
