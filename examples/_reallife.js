@@ -47,7 +47,7 @@ page('landing page');
 
 //# config1.js -----------------------------
 config.entrance = 'login';
-context = {
+context.global = {
   lang: 'en',
   platform: 'ios',
   device: 'iPhone 6+'
@@ -55,8 +55,8 @@ context = {
 
 //# config2.js -----------------------------
 config.entrance = 'login';
-context.lang = 'cn';
-context.platform = 'android';
+context.global.lang = 'cn';
+context.global.platform = 'android';
 
 // command examples
 /*
