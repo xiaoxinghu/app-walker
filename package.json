@@ -8,7 +8,7 @@
   "description": "an app walker",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --recursive"
   },
   "author": "Xiaoxing Hu <dawnstar.hu@gmail.com>",
   "license": "MIT",
