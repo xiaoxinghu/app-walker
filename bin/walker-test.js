@@ -1,28 +1,30 @@
 #!/usr/bin/env node
+"use strict";
 
-var util = require('util');
+var program = require('commander'),
+    path = require('path'),
+    util = require('util'),
+    mocha = require('mocha');
 
-var walker = require('../lib/appwalker');
-var evalCode = require('../lib/appwalker/helper').evalCode;
+var app = require('../lib/appwalker');
 
-var sandbox = {
-  page: walker.page,
-  Page: walker.page,
-  config: walker.config,
-  console: console
-};
-// ['simple.js'].forEach(path => evalCode(path));
-// ['graph.js'].forEach(path => evalCode(path, sandbox));
 
-// console.log(util.inspect(walker, false, null));
+program
+  .parse(process.argv);
 
-// var e = walker.graph.outEdges('login');
-// var e = walker.graph.edge('login', 'password');
-// console.log(util.inspect(e, false, null));
-// e.func();
+// var mocha = new Mocha();
 
-// walker.walk();
+// mocha.addFile(path.join(__dirname, '_mocha.js'));
+// mocha.run(failures => {
+//   process.on('exit', () => {
+//     process.exit(failures);
+//   });
+// });
 
-console.log(util.inspect(walker, false, null));
-// console.log(util.inspect(walker.prototype.EVENTS, false, null));
+// var title = app.interface.driver().get("http://google.com").title();
 
+console.log('start');
+app.interface.driver().get("http://google.com").title().should.become('Baidu').fin(() => {
+  console.log('real end');
+}).done();
+console.log('end');

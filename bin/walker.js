@@ -9,4 +9,5 @@ program
   .command('walk', 'walk the current directory')
   .command('preview', 'generate graph')
   .command('info [subject]', 'show info')
+  .command('test', 'test')
   .parse(process.argv);

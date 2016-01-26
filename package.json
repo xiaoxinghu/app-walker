@@ -17,6 +17,7 @@
     "walker": "bin/walker.js"
   },
   "dependencies": {
+    "chai-as-promised": "^5.2.0",
     "colors": "^1.1.2",
     "commander": "^2.9.0",
     "graphlib": "^2.0.0",

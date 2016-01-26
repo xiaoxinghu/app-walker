@@ -24,36 +24,43 @@ let flows = walker.genFlows();
 
 var expect = require('chai').expect;
 
-describe('walking', () => {
+describe('walking', function() {
+  this.timeout(10000);
   before(() => {
-    walker.emit(EVENTS.PRE_WALK);
+    return app.runHook('before');
   });
 
   after(() => {
-    walker.emit(EVENTS.POST_WALK);
+    return app.runHook('after');
   });
 
   beforeEach(() => {
-    walker.emit(EVENTS.PRE_FLOW, {desc: 'blah'});
+    return app.runHook('beforeEach');
   });
 
   afterEach(() => {
-    walker.emit(EVENTS.POST_FLOW);
+    return app.runHook('afterEach');
   });
 
   flows.forEach((flow) => {
     it(`can go ${flow.join(' -> ')}`, () => {
+      let promise = Promise.resolve();
       flow.forEach((element, index, array) => {
-        walker.emit(EVENTS.ON_NODE, graph.node(element));
+        promise = promise.then(() => {
+          return app.runHook('onNode', graph.node(element));
+        });
         if (index < array.length - 1) {
           let edge = graph.edge(element, array[index + 1]);
-          walker.emit(EVENTS.ON_EDGE, {
-            from: graph.node(element),
-            to: graph.node(array[index + 1]),
-            edge
+          promise = promise.then(() => {
+            return app.runHook('onEdge', {
+              from: graph.node(element),
+              to: graph.node(array[index + 1]),
+              edge
+            });
           });
         }
       });
+      return promise;
     });
   });
 });
