@@ -14,16 +14,4 @@ page('login')
   .can.goto('password', (info) => {
     output('enter user name');
     output('press login button');
-    // output(info.from.name, info.to.name, driver);
-    // output(info);
-    driver().get("http://google.com").title().should.become('Google').done();
-    // driver().title().should.become('Baidu').done();
-    // info.app.wd.browser.get();
-    // var counter = 0;
-    // var sum = 0;
-    // while (counter < 10000000000) {
-    //   sum += counter;
-    //   counter++;
-    // }
-    // output('sum:', sum);
   });
