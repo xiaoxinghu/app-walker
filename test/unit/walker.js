@@ -39,10 +39,10 @@ describe('walker', () => {
     };
 
     let EVENTS = app.EVENTS;
-    app.walker.on(EVENTS.PRE_FLOW, preFLow);
-    app.walker.on(EVENTS.POST_FLOW, postFLow);
-    app.walker.on(EVENTS.PRE_WALK, preWalk);
-    app.walker.on(EVENTS.POST_WALK, postWalk);
+    app.walker.on(EVENTS.BEFORE_EACH, preFLow);
+    app.walker.on(EVENTS.AFTER_EACH, postFLow);
+    app.walker.on(EVENTS.BEFORE_ALL, preWalk);
+    app.walker.on(EVENTS.AFTER_ALL, postWalk);
 
     config.entrance = 'state1';
     state('state1').can.goto('state2');
@@ -57,9 +57,9 @@ describe('walker', () => {
     expect(counter.pre.flow).to.equal(4);
     expect(counter.pre.flow).to.equal(4);
 
-    app.walker.removeListener(EVENTS.PRE_FLOW, preFLow);
-    app.walker.removeListener(EVENTS.POST_FLOW, postFLow);
-    app.walker.removeListener(EVENTS.PRE_WALK, preWalk);
-    app.walker.removeListener(EVENTS.POST_WALK, postWalk);
+    app.walker.removeListener(EVENTS.BEFORE_EACH, preFLow);
+    app.walker.removeListener(EVENTS.AFTER_EACH, postFLow);
+    app.walker.removeListener(EVENTS.BEFORE_ALL, preWalk);
+    app.walker.removeListener(EVENTS.AFTER_ALL, postWalk);
   });
 });
