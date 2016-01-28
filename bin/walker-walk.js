@@ -8,10 +8,14 @@ var program = require('commander'),
 
 program
   .option('-d, --dry', 'dry run')
+  .option('-v, --verbose', 'verbose mode')
   .parse(process.argv);
 
 
 if (program.dry) console.log('dry run');
+if (program.verbose) {
+  require('../lib/appwalker').interface.use('walklog');
+}
 
 var mocha = new Mocha();
 

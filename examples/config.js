@@ -1,2 +1,2 @@
 config.entrance = 'login';
-// use('walklog');
+use('wd');
