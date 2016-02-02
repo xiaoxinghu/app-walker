@@ -22,7 +22,8 @@
     "commander": "^2.9.0",
     "graphlib": "^2.0.0",
     "graphlib-dot": "^0.6.2",
-    "wd": "^0.4.0"
+    "wd": "^0.4.0",
+    "webdriverio": "^3.4.0"
   },
   "devDependencies": {
     "chai": "^3.4.1",
