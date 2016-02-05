@@ -28,6 +28,7 @@ files.forEach(path => evalCode(path, sandbox));
 
 if (!fs.existsSync(program.dir)) fs.mkdirSync(program.dir);
 
+app.compiler.compile(app.graph);
 app.graph.setNode('start', {shape: 'diamond', color: 'red'});
 app.graph.setEdge('start', app.config.entrance, {label: 'start'});
 // app.graph.edges().forEach((edge) => {

@@ -5,26 +5,28 @@ var program = require('commander'),
     path = require('path'),
     util = require('util'),
     mocha = require('mocha');
+var fs = require('fs');
+var evalCode = require('../lib/appwalker/helper').evalCode;
 
 var app = require('../lib/appwalker');
-
 
 program
   .parse(process.argv);
 
-// var mocha = new Mocha();
 
-// mocha.addFile(path.join(__dirname, '_mocha.js'));
-// mocha.run(failures => {
-//   process.on('exit', () => {
-//     process.exit(failures);
-//   });
-// });
+var sandbox = Object.assign({}, app.interface);
 
-// var title = app.interface.driver().get("http://google.com").title();
+var files = fs.readdirSync('.').filter((f) => {
+  let match = false;
+  ['.', '_'].forEach((c) => {
+    match |= f.startsWith(c);
+  });
+  return f.endsWith('.js') && !match;
+});
+files.forEach(path => evalCode(path, sandbox));
 
-console.log('start');
-app.interface.driver().get("http://google.com").title().should.become('Baidu').fin(() => {
-  console.log('real end');
-}).done();
-console.log('end');
+// console.log(util.inspect(app.graph, false, null));
+app.compiler.compile(app.graph);
+console.log(util.inspect(app.graph, false, null));
+
+// app.compiler.inspect();
