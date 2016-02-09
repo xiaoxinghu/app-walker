@@ -26,7 +26,8 @@ var files = fs.readdirSync('.').filter((f) => {
 files.forEach(path => evalCode(path, sandbox));
 
 // console.log(util.inspect(app.graph, false, null));
-app.compiler.compile(app.graph);
-console.log(util.inspect(app.graph, false, null));
+// app.compiler.compile(app.graph);
+// console.log(util.inspect(app.graph, false, null));
 
 // app.compiler.inspect();
+console.log(util.inspect(app.compiler, false, null));

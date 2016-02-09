@@ -63,3 +63,32 @@ context.global.platform = 'android';
  walker walk -c config1.js
  walker walk --config config2.js
 */
+
+
+//# contexts
+
+when({lang: 'en'}).page('blah');
+
+page('blah').when({lang: 'en'});
+
+when({lang: 'en'}).page('blah')
+  .should.have.button('login')
+  .when({lang: 'en'})
+  .should.have.button('calncle');
+
+when({lang: 'en'}).page('blah')
+  .should.have.button('login')
+  .when({lang: 'en'}, it => {
+      it.should.have.button('calncle');
+  });
+
+describe('landing page', it => {
+  it.has('login').find.by('#login');
+  it.has('cancel').find.by('#cancel');
+  describe('logout', it => {
+    it.can.be.find.by('#logout');
+  });
+  when('valid user', it => {
+    it.has.button('retry');
+  });
+});

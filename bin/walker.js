@@ -10,4 +10,5 @@ program
   .command('preview', 'generate graph')
   .command('info [subject]', 'show info')
   .command('test', 'test')
+  .command('poc', 'poc')
   .parse(process.argv);
