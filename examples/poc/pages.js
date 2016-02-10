@@ -22,6 +22,13 @@ describe('login page', it => {
       describe('sub view button1', it => {});
     });
   });
+
+  it.can.goto('landing page', page => {
+    page
+      .setValue('#username', 'admin')
+      .setValue('#password', '123')
+      .click('#login');
+  });
 });
 
 describe('landing page', it => {

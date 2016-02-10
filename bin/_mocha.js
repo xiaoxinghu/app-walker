@@ -5,7 +5,6 @@ var util = require('util'),
     path = require('path');
 
 var app = require('../lib/appwalker'),
-    EVENTS = app.EVENTS,
     walker = app.walker,
     graph = app.graph,
     evalCode = require('../lib/appwalker/helper').evalCode;
@@ -20,7 +19,9 @@ var files = fs.readdirSync('.').filter((f) => {
   return f.endsWith('.js') && !match;
 });
 files.forEach(path => evalCode(path, sandbox));
-let flows = walker.genFlows();
+
+app.compiler.compile(app.graph);
+let flows = app.graph.genFlows(app.config.entrance);
 
 var expect = require('chai').expect;
 
@@ -52,11 +53,7 @@ describe('walking', function() {
         if (index < array.length - 1) {
           let edge = graph.edge(element, array[index + 1]);
           promise = promise.then(() => {
-            return walker.runHook('onEdge', {
-              from: graph.node(element),
-              to: graph.node(array[index + 1]),
-              edge
-            });
+            return walker.runHook('onEdge', edge);
           });
         }
       });
