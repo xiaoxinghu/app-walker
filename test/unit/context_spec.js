@@ -8,7 +8,7 @@ var expect = require('chai').expect;
 
 describe('context', () => {
   beforeEach(() => {
-    context.reset();
+    walker.reset();
   });
 
   it ('can switch scenarios', () => {

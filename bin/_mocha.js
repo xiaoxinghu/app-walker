@@ -26,21 +26,21 @@ let flows = app.graph.genFlows(app.config.entrance);
 var expect = require('chai').expect;
 
 describe('walking', function() {
-  this.timeout(10000);
+  this.timeout(20000);
   before(() => {
-    return walker.runHook('before');
+    return walker.hook('before');
   });
 
   after(() => {
-    return walker.runHook('after');
+    return walker.hook('after');
   });
 
   beforeEach(() => {
-    return walker.runHook('beforeEach');
+    return walker.hook('beforeEach');
   });
 
   afterEach(() => {
-    return walker.runHook('afterEach');
+    return walker.hook('afterEach');
   });
 
   flows.forEach((flow) => {
@@ -48,12 +48,12 @@ describe('walking', function() {
       let promise = Promise.resolve();
       flow.forEach((element, index, array) => {
         promise = promise.then(() => {
-          return walker.runHook('onNode', graph.node(element));
+          return walker.hook('onNode', graph.node(element));
         });
         if (index < array.length - 1) {
           let edge = graph.edge(element, array[index + 1]);
           promise = promise.then(() => {
-            return walker.runHook('onEdge', edge);
+            return walker.hook('onEdge', edge);
           });
         }
       });
