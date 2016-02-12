@@ -11,10 +11,11 @@ var evalCode = require('../lib/appwalker/utils').evalCode;
 
 program
   .option('-d, --dir <dir>', 'output folder', 'preview')
+  .option('-c, --config <config>', 'config file', 'config.js')
   .option('-o, --out <out>', 'output file name', 'graph.dot')
   .parse(process.argv);
 
-
+app.loadConfig(program.config);
 var sandbox = Object.assign({}, app.interface);
 
 var files = fs.readdirSync('.').filter((f) => {
