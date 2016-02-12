@@ -1,12 +1,12 @@
 ## Quick Start
 
-To preview the project.
+### To preview the project.
 
 ```bash
 walker preview
 ```
 
-To run the test.
+### To run the test.
 
 1. Install [selenium server](http://www.seleniumhq.org/download/) and [chrome driver](https://sites.google.com/a/chromium.org/chromedriver/).
 On Mac:
