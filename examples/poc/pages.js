@@ -1,12 +1,12 @@
 describe('login page', it => {
-  it.has('login btn').locator('#login');
+  it.has('login btn').by('#login');
   describe('cancel button', it => {
-    it.locator('#cancel');
+    it.by('#cancel');
   });
 
   it.has('title')
     .when({platform: 'Android'}, it => {
-    it.locator('#title');
+    it.by('#title');
     })
     .when({platform: 'iOS'}, it => {
     it.can.be.find.by('//title');
