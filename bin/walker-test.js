@@ -26,14 +26,16 @@ var files = fs.readdirSync('.').filter((f) => {
 });
 files.forEach(path => evalCode(path, sandbox));
 
-// console.log(util.inspect(app.graph, false, null));
-// app.compiler.compile(app.graph);
-// console.log(util.inspect(app.graph, false, null));
-
-// app.compiler.inspect();
+// *** testing the reset function
+app.compiler.compile(app.graph);
 console.log(util.inspect(app.compiler, false, null));
+// console.log(util.inspect(app.graph, false, null));
 
+// app.walker.reset();
+// console.log(util.inspect(app.compiler, false, null));
+// console.log(util.inspect(app.graph, false, null));
 
+// ***
 // app.reset();
 // var funcs = [R.multiply(2), R.add(3), R.multiply(2)];
 // var func = n => {
@@ -48,3 +50,4 @@ console.log(util.inspect(app.compiler, false, null));
 // var v = R.ap([R.multiply(2), R.add(3), R.multiply(2)], [1,2,3]);
 // var v = func(2);
 // console.log(v);
+

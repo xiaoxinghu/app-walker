@@ -1,14 +1,14 @@
 'use strict';
 
 var util = require('util');
-var walker = require('../../lib/appwalker');
-var context = walker.interface.context;
-var scenario = walker.interface.scenario;
+var app = require('../../lib/appwalker');
+var context = app.interface.context;
+var scenario = app.interface.scenario;
 var expect = require('chai').expect;
 
 describe('context', () => {
   beforeEach(() => {
-    walker.reset();
+    return app.walker.reset();
   });
 
   it ('can switch scenarios', () => {

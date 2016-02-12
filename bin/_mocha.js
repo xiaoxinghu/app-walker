@@ -20,27 +20,25 @@ var files = fs.readdirSync('.').filter((f) => {
 });
 files.forEach(path => evalCode(path, sandbox));
 
-app.compiler.compile(app.graph);
-let flows = app.graph.genFlows(app.config.entrance);
-
-var expect = require('chai').expect;
+app.compiler.compile(graph);
+let flows = graph.genFlows(app.config.entrance);
 
 describe('walking', function() {
   this.timeout(20000);
   before(() => {
-    return walker.hook('before');
+    return walker.before();
   });
 
   after(() => {
-    return walker.hook('after');
+    return walker.after();
   });
 
   beforeEach(() => {
-    return walker.hook('beforeEach');
+    return walker.beforeEach();
   });
 
   afterEach(() => {
-    return walker.hook('afterEach');
+    return walker.afterEach();
   });
 
   flows.forEach((flow) => {
@@ -48,12 +46,12 @@ describe('walking', function() {
       let promise = Promise.resolve();
       flow.forEach((element, index, array) => {
         promise = promise.then(() => {
-          return walker.hook('onNode', graph.node(element));
+          return walker.onNode(graph.node(element));
         });
         if (index < array.length - 1) {
           let edge = graph.edge(element, array[index + 1]);
           promise = promise.then(() => {
-            return walker.hook('onEdge', edge);
+            return walker.onEdge(edge);
           });
         }
       });
