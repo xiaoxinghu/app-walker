@@ -10,16 +10,11 @@ describe('google', it => {
 
 describe('result page', it => {
   it.has('Images').by('=Images');
-  it.has('Videos').by('=Videos');
   it.has('github link').by('*=xiaoxinghu/appwalker');
 
   it.can.goto('images page', d => {
     return d.clickOn('Images').pause(2000);
   });
-
-  // it.can.goto('videos page', d => {
-  //   return d.clickOn('Videos').pause(2000);
-  // });
 
   it.can.goto('github page', d => {
     return d.clickOn('github link').pause(2000);
