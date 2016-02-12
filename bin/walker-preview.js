@@ -7,7 +7,7 @@ var fs = require('fs');
 var path = require('path');
 var dot = require('graphlib-dot');
 var app = require('../lib/appwalker');
-var evalCode = require('../lib/appwalker/helper').evalCode;
+var evalCode = require('../lib/appwalker/utils').evalCode;
 
 program
   .option('-d, --dir <dir>', 'output folder', 'preview')

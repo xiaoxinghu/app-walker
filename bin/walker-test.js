@@ -7,7 +7,7 @@ var program = require('commander'),
     R = require('ramda'),
     mocha = require('mocha');
 var fs = require('fs');
-var evalCode = require('../lib/appwalker/helper').evalCode;
+var evalCode = require('../lib/appwalker/utils').evalCode;
 
 var app = require('../lib/appwalker');
 

@@ -2,7 +2,7 @@
 "use strict";
 
 var app = require('../lib/appwalker');
-var alias = require('../lib/appwalker/helper/alias');
+var alias = require('../lib/appwalker/utils/alias');
 var R = require('ramda');
 
 class Subject {

@@ -7,7 +7,7 @@ var util = require('util'),
 var app = require('../lib/appwalker'),
     walker = app.walker,
     graph = app.graph,
-    evalCode = require('../lib/appwalker/helper').evalCode;
+    evalCode = require('../lib/appwalker/utils').evalCode;
 
 var sandbox = Object.assign({}, app.interface);
 
